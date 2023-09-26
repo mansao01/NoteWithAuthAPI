@@ -20,8 +20,7 @@ const UserModel = db.define("user", {
         allowNull: false
     },
     refresh_token: {
-        type: DataTypes.TEXT,
-        allowNull: false
+        type: DataTypes.TEXT
     }
 }, {
     freezeTableName: true,
