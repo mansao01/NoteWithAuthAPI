@@ -99,7 +99,7 @@ export const getProfile = async (req, res) => {
 
         // Fetch logged-in user's data
         const loggedInUser = await UserModel.findByPk(loggedInUserId, {
-            attributes: ['name', 'email']
+            attributes: ['id','name', 'email']
         });
 
         if (!loggedInUser) {
@@ -107,6 +107,7 @@ export const getProfile = async (req, res) => {
         }
 
         res.json({
+            loggedInId: loggedInUser.id,
             loggedInUserName: loggedInUser.name,
             loggedInUserEmail: loggedInUser.email
         });
