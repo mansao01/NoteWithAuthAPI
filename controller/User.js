@@ -5,6 +5,9 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res) => {
     const {name, email, password} = req.body;
 
+    if (password.length < 6) {
+        return res.status(400).json({ msg: "Password must be at least 6 characters long" });
+    }
 
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -58,7 +61,7 @@ export const loginUser = async (req, res) => {
         await UserModel.update({refresh_token: refreshToken}, {
             where: {id}
         });
-        const response = {accessToken, refreshToken};
+        const response = {id, accessToken, refreshToken};
         res.status(200).json(response);
     } catch (error) {
         console.error("Error during login:", error);

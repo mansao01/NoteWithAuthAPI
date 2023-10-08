@@ -5,7 +5,6 @@ import db from "../config/Database.js";
 const UserModel = db.define("user", {
     name: {
         type: DataTypes.STRING,
-        unique: true,
         allowNull: false
 
     },

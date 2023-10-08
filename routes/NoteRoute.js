@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/v1/notes/:userId", verifyToken, getNotesById)
 router.get("/v1/notes", getNotes)
 router.post("/v1/note", verifyToken, createNote)
-router.delete("/v1/note", verifyToken, deleteNote)
-router.patch("/v1/note", verifyToken, updateNote)// not tested yet
+router.delete("/v1/note/:id", verifyToken, deleteNote)
+router.patch("/v1/note/:id", verifyToken, updateNote)
 
 export default router;
