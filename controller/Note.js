@@ -15,6 +15,31 @@ export const getNotesById = async (req, res) => {
     }
 }
 
+export const getDetailNoteById = async (req, res) => {
+    try {
+        const noteId = req.params.id; // Extract the note ID from the request parameters
+
+        // Use Sequelize's findOne method to retrieve a single note by its ID
+        const note = await noteModel.findOne({
+            where: {
+                id: noteId
+            }
+        });
+
+        if (!note) {
+            // Handle the case where the note was not found
+            return res.status(404).json({ msg: 'Note not found' });
+        }
+
+        // Respond with the found note
+        return res.status(200).json({ data: note });
+    } catch (error) {
+        // Handle any unexpected errors and return a meaningful error message
+        return res.status(500).json({ msg: 'Internal server error' });
+    }
+};
+
+
 export const getNotes = async (req, res) => {
     try {
         let response = await noteModel.findAll()
